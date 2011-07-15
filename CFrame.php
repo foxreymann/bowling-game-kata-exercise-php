@@ -2,8 +2,9 @@
 
 /* Points from one frame */
 class CFrame {
-    $m_aPoints = [];
-    $m_iBonusDue;  
+
+    private $m_aPoints = array();
+    private $m_iBonusDue;  
 
     function fGetScore() {
        return 0;
