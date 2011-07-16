@@ -3,8 +3,8 @@
 
     $oGame = new CGame; 
 
-    $oGame->fRoll('9');
-    $oGame->fRoll('0');
+    echo $oGame->fRoll('9');
+    echo $oGame->fRoll('0');
 
-    $oGame->fRoll('10');
+    echo $oGame->fRoll('10');
 ?>

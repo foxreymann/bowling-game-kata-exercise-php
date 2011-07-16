@@ -13,6 +13,10 @@ class CFrame {
     function fNextRollDue() {
        return false;
     }     
+
+    function fAddRoll() {
+        
+    }
 } 
 
 ?>
