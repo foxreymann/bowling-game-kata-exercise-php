@@ -14,11 +14,13 @@ class CGame {
         if(!count($this->m_aFrames) || !$this->m_aFrames[count($this->m_aFrames)-1]->fNextRollDue()) {
 //echo $this->m_aFrames[count($this->m_aFrames)-1]->fNextRollDue();
 echo 'new frame'; 
-            $m_aFrames[] = new CFrame;
+            $this->m_aFrames[] = new CFrame($this->m_iNumberOfPins);
             
         }
+var_dump($this->m_aFrames);
+echo "<br />";
         // Add the roll points to the frame
-        $this->m_aFrames[count($this->m_aFrames)-1]->fAddRoll($iPins);
+        $this->m_aFrames[count($this->m_aFrames)-1]->fHandleRoll($iPins);
          
  
         return true;
