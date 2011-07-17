@@ -5,25 +5,31 @@ include 'CFrame.php';
 /* Game manager */
 class CGame {
     
-    private $m_iScore = 0; 
-    private $m_aFrames = array();
-    private $m_iNumberOfFrames = 10;
-    private $m_iNumberOfPins = 10;
+    private $iScore = 0; 
+    private $aFrames = array();
+    private $iNumberOfFrames = 10;
 
     function fRoll($iPins) {
-        if(!count($this->m_aFrames) || !$this->m_aFrames[count($this->m_aFrames)-1]->fNextRollDue()) {
-//echo $this->m_aFrames[count($this->m_aFrames)-1]->fNextRollDue();
-echo 'new frame'; 
-            $this->m_aFrames[] = new CFrame($this->m_iNumberOfPins);
-            
+        if(!count($this->aFrames) || !$this->aFrames[count($this->aFrames)-1]->fNextRollDue()) {
+            $this->aFrames[] = new CFrame();
         }
-var_dump($this->m_aFrames);
-echo "<br />";
         // Add the roll points to the frame
-        $this->m_aFrames[count($this->m_aFrames)-1]->fHandleRoll($iPins);
+        $this->aFrames[count($this->aFrames)-1]->fHandleRoll($iPins);
          
- 
-        return true;
+//var_dump($this->aFrames); 
+        return $this->fCountScore();
+    }
+
+    function fGetScore() {
+        return $this->fCountScore();
+    } 
+
+    private function fCountScore() {
+        $this->iScore = 0;
+        foreach($this->aFrames as $iKey => $oFrame) {
+            $this->iScore += $oFrame->fGetFrameScore();
+        } 
+        return $this->iScore;
     } 
 
 } 

@@ -3,25 +3,52 @@
 /* Points from one frame */
 class CFrame {
 
-    private $m_aPoints = array();
-    private $m_iBonusDue = 0;  
+    protected $aRolls = array();
+    protected $iBonusDue = 0;  
 
-    private $m_iNumberOfPins = 0;
+    const NUMBER_OF_PINS = 10;
+    const NUMBER_OF_ROLLS = 2;
+    const STRIKE = 1;
+    const SPARE = 2; 
+    const STRIKE_BONUS = 2;
+    const SPARE_BONUS = 1;
 
-    function __construct($m_iNumberOfPins) {
-        $this->m_iNumberOfPins = $m_iNumberOfPins;
+    function fGetFrameScore() {
+       return array_sum($this->aRolls);
     }
 
-    function fGetScore() {
+    function fGetRollScore($iRollNumber) {
+       if(isset($this->aRolls[$iRollNumber])) {
+           return $this->aRolls[$iRollNumber];
+        } else {
+            return false;
+        }
+    }
+
+    function fGetBonus() {
        return 0;
     }
 
     function fNextRollDue() {
-       return false;
+        if(count($this->aRolls) < self::NUMBER_OF_ROLLS){
+            return true;
+        }
+        return false;
     }     
 
     function fHandleRoll($iPins) {
-        $this->m_aPoints[];    
+        if($this->fNextRollDue()) {
+            $this->aRolls[] = $iPins;    
+            // if bonus due
+            if(array_sum($this->aRolls) == self::NUMBER_OF_PINS) {
+                // give bonus
+                if(self::STRIKE == count($this->aRolls)) {
+                    $this->iBonusDue = self::STRIKE_BONUS;    
+                } elseif (self::SPARE == count($this->aRolls)) {
+                    $this->iBonusDue = self::SPARE_BONUS;    
+                }
+            }
+        }
     }
 } 
 
