@@ -3,8 +3,13 @@
 
     $oGame = new CGame; 
 
-    echo $oGame->fRoll('9').'<br />';
-    echo $oGame->fRoll('0').'<br />';
+    echo $oGame->fRoll('9').'<br />'; // score should be 9
+    echo $oGame->fRoll('1').'<br />'; // score should be 10
 
-    echo $oGame->fRoll('10').'<br />';
+    echo $oGame->fRoll('9').'<br />'; // score should be 28
+    echo $oGame->fRoll('1').'<br />'; // score should be 29
+
+    echo $oGame->fRoll('8').'<br />'; // score should be 
+    echo $oGame->fRoll('2').'<br />';
+
 ?>

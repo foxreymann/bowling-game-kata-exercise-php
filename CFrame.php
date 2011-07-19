@@ -25,8 +25,8 @@ class CFrame {
         }
     }
 
-    function fGetBonus() {
-       return 0;
+    function fGetBonusDue() {
+       return $this->iBonusDue;
     }
 
     function fNextRollDue() {

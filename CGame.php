@@ -26,8 +26,17 @@ class CGame {
 
     private function fCountScore() {
         $this->iScore = 0;
+        $iBonusDuePrevFrame = 0;
+        $iBonusDueOneBeforePrevFrame = 0;
         foreach($this->aFrames as $iKey => $oFrame) {
             $this->iScore += $oFrame->fGetFrameScore();
+            // add bonuses to the score
+            if(1 == $iBonusDuePrevFrame) {
+                $this->iScore += $oFrame->fGetRollScore(1);
+            }            
+            // move bonuses due data one frame forward
+            $iBonusDueOneBeforePrevFrame = $iBonusDuePrevFrame;
+            $iBonusDuePrevFrame = $oFrame->fGetBonusDue();            
         } 
         return $this->iScore;
     } 
