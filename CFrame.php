@@ -50,6 +50,12 @@ class CFrame {
             }
         }
     }
+
+    function fHandleBonus($iPins) {
+        if($this->iBonusDue--) {
+            $this->aRolls[] = $iPins;
+        }
+    }
 } 
 
 ?>

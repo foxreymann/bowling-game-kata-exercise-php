@@ -10,13 +10,25 @@ class CGame {
     private $iNumberOfFrames = 10;
 
     function fRoll($iPins) {
-        if(!count($this->aFrames) || !$this->aFrames[count($this->aFrames)-1]->fNextRollDue()) {
+        $iNumberOfFrames = count($this->aFrames);
+        if(!$iNumberOfFrames || !$this->aFrames[$iNumberOfFrames-1]->fNextRollDue()) {
             $this->aFrames[] = new CFrame();
+            $iNumberOfFrames++;
         }
-        // Add the roll points to the frame
-        $this->aFrames[count($this->aFrames)-1]->fHandleRoll($iPins);
-         
-//var_dump($this->aFrames); 
+
+        // add the roll points to the frame
+        $this->aFrames[$iNumberOfFrames-1]->fHandleRoll($iPins);
+
+        // add points for bonus from previous frame        
+        if(count($this->aFrames) > 1 && $this->aFrames[$iNumberOfFrames-2]->fGetBonusDue()) {  
+           $this->aFrames[$iNumberOfFrames-2]->fHandleBonus($iPins); 
+        }
+
+        // add points for bonus from one before previous frame
+        if(count($this->aFrames) > 2 && $this->aFrames[$iNumberOfFrames-3]->fGetBonusDue()) {  
+           $this->aFrames[$iNumberOfFrames-3]->fHandleBonus($iPins); 
+        }
+
         return $this->fCountScore();
     }
 
@@ -26,17 +38,8 @@ class CGame {
 
     private function fCountScore() {
         $this->iScore = 0;
-        $iBonusDuePrevFrame = 0;
-        $iBonusDueOneBeforePrevFrame = 0;
         foreach($this->aFrames as $iKey => $oFrame) {
             $this->iScore += $oFrame->fGetFrameScore();
-            // add bonuses to the score
-            if(1 == $iBonusDuePrevFrame) {
-                $this->iScore += $oFrame->fGetRollScore(1);
-            }            
-            // move bonuses due data one frame forward
-            $iBonusDueOneBeforePrevFrame = $iBonusDuePrevFrame;
-            $iBonusDuePrevFrame = $oFrame->fGetBonusDue();            
         } 
         return $this->iScore;
     } 
