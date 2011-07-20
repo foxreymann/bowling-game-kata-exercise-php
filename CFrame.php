@@ -30,7 +30,7 @@ class CFrame {
     }
 
     function fNextRollDue() {
-        if(count($this->aRolls) < self::NUMBER_OF_ROLLS){
+        if(count($this->aRolls) < self::NUMBER_OF_ROLLS && array_sum($this->aRolls) < self::NUMBER_OF_PINS){
             return true;
         }
         return false;

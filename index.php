@@ -12,4 +12,8 @@
     echo $oGame->fRoll('8').'<br />'; // score should be 45 
     echo $oGame->fRoll('2').'<br />'; // score should be 47 
 
+    echo $oGame->fRoll('10').'<br />'; // score should be 67
+
+    echo $oGame->fRoll('1').'<br />'; // score should be 69
+    echo $oGame->fRoll('1').'<br />'; // score should be 71 
 ?>

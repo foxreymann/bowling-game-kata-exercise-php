@@ -20,12 +20,12 @@ class CGame {
         $this->aFrames[$iNumberOfFrames-1]->fHandleRoll($iPins);
 
         // add points for bonus from previous frame        
-        if(count($this->aFrames) > 1 && $this->aFrames[$iNumberOfFrames-2]->fGetBonusDue()) {  
+        if($iNumberOfFrames > 1 && $this->aFrames[$iNumberOfFrames-2]->fGetBonusDue()) {  
            $this->aFrames[$iNumberOfFrames-2]->fHandleBonus($iPins); 
         }
 
         // add points for bonus from one before previous frame
-        if(count($this->aFrames) > 2 && $this->aFrames[$iNumberOfFrames-3]->fGetBonusDue()) {  
+        if($iNumberOfFrames > 2 && $this->aFrames[$iNumberOfFrames-3]->fGetBonusDue()) {  
            $this->aFrames[$iNumberOfFrames-3]->fHandleBonus($iPins); 
         }
 
