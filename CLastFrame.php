@@ -8,7 +8,7 @@ class CLastFrame extends CFrame {
     function fNextRollDue() {
         if(count($this->aRolls) < self::NUMBER_OF_ROLLS) {
             // 3rd roll check
-            if(count($this->aRolls) == 3 && array_sum($this->aRolls) < self::NUMBER_OF_PINS) {
+            if(count($this->aRolls) == self::NUMBER_OF_ROLLS - 1 && array_sum($this->aRolls) < self::NUMBER_OF_PINS) {
                 return false ;
             }
             return true; 
