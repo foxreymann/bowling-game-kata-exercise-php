@@ -1,18 +1,26 @@
 <?php
 
 include 'CFrame.php';
+include 'CLastFrame.php';
 
 /* Game manager */
 class CGame {
     
     private $iScore = 0; 
     private $aFrames = array();
-    private $iNumberOfFrames = 10;
+    
+    const  NUMBER_OF_FRAMES = 10;
 
     function fRoll($iPins) {
         $iNumberOfFrames = count($this->aFrames);
         if(!$iNumberOfFrames || !$this->aFrames[$iNumberOfFrames-1]->fNextRollDue()) {
-            $this->aFrames[] = new CFrame();
+            if(self::NUMBER_OF_FRAMES <= $iNumberOfFrames) {
+                throw new Exception('The game has finished.'); 
+            } elseif(self::NUMBER_OF_FRAMES - 1 == $iNumberOfFrames) {
+                $this->aFrames[] = new CLastFrame();
+            } else {
+                $this->aFrames[] = new CFrame();
+            }
             $iNumberOfFrames++;
         }
 
